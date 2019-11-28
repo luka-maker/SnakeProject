@@ -22,7 +22,7 @@ DOWN = WIDTH
 
 DIRC_LIST = [LEFT, UP, RIGHT, DOWN]
 
-
+#ამ ფუნქციით ვქმნით 'Snake'-ის ფანჯარას და ვუთითებთ თამაშის ძირითად კომპონენტებს.
 def reset_all():
     global snake, board, snake_size, _snake, _board, _snake_size, food, score
     board = [0] * HEIGHT * WIDTH  # use one dimensional list to represent 2 dimensional board
@@ -37,9 +37,9 @@ def reset_all():
 
     food = 7 * WIDTH + 8
     
-    #ამ ფუნქციით ვქმნით 'Snake'-ის ფანჯარას და ვუთითებთ თამაშის ძირითად კომპონენტებს.
+   
 
-
+#ამ ფუნქციით ვქმნით 'Snake'-ის სათამაშო დაფას 
 def init_board(__snake, __size, __board):
     for i in range(HEIGHT * WIDTH):
         if i == food:
@@ -49,8 +49,8 @@ def init_board(__snake, __size, __board):
         else:
             __board[i] = SNAKE
 
-     #ამ ფუნქციით ვქმნით 'Snake'-ის სათამაშო დაფას 
-
+    
+#ეს ფუნქცია განსაზღვრავს თამაშში გველის მოძრაობებს(მარცხნივ, მარჯვნივ, ზემოთ, ქვემოთ)
 def can_move(pos, dirc):
     if dirc == UP and pos / WIDTH > 0:
         return True
@@ -62,7 +62,7 @@ def can_move(pos, dirc):
         return True
     return False
 
-     #ეს ფუნქცია განსაზღვრავს თამაშში გველის მოძრაობებს(მარცხნივ, მარჯვნივ, ზემოთ, ქვემოთ)
+     
     
       
 def find_food_path_bfs(__food, __snake, __board):
@@ -104,7 +104,7 @@ def mv_body(__snake, __snake_size):
     for i in range(__snake_size, 0, -1):
         __snake[i] = __snake[i - 1]
 
-
+#ეს ფუნქცია აგენერირებს გველის საჭმელს არეულად(random)
 def gen_food():
     global food, snake_size
     a = False
@@ -113,7 +113,7 @@ def gen_food():
         h = randint(1, HEIGHT - 2)
         food = h * WIDTH + w
         a = not (food in snake[:snake_size])
-      #ეს ფუნქცია აგენერირებს გველის საჭმელს არეულად(random)
+ 
 
 def r_move(__mv):
     global snake, board, snake_size, score
@@ -244,7 +244,8 @@ def run():
         pygame.display.update()
         pygame.time.Clock().tick(20)
 
-
+ #ამ ფუნქციით ვქმნით თამაშის დაწების ეკრანს(ფანჯარას) რომელიც გამოდის პროგრამის გაშვებისას. ამ ფანჯარაზე გამოსახულია თამაშის 
+    #სათაური და ჩართვის(Play) ღილაკი
 def start_screen():
     start = True
     screen.fill(BLACK)
@@ -267,9 +268,11 @@ def start_screen():
         pygame.display.update()
     pygame.quit()
     sys.exit()
-    #ამ ფუნქციით ვქმნით თამაშის დაწების ეკრანს(ფანჯარას) რომელიც გამოდის პროგრამის გაშვებისას. ამ ფანჯარაზე გამოსახულია თამაშის 
-    #სათაური და ჩართვის(Play) ღილაკი
+   
 
+
+ #ამ ფუნქციით ვქმნით თამაშის დასასრულის ფანჯარას. ამ ფანჯარაზე გამოსახულია 'თამაში დასრულებულია'(Game Over) და დაგროვებული
+ #ქულების რაოდენობა.
 def gg_screen():
     gg = True
     screen.fill(BLACK)
@@ -285,8 +288,6 @@ def gg_screen():
     screen.blit(term, (114, 270))
     screen.blit(back, (310, 300))
     
-    #ამ ფუნქციით ვქმნით თამაშის დასასრულის ფანჯარას. ამ ფანჯარაზე გამოსახულია 'თამაში დასრულებულია'(Game Over) და დაგროვებული
-    #ქულების რაოდენობა.
 
     while gg:
         for event in pygame.event.get():
