@@ -36,6 +36,8 @@ def reset_all():
     _snake_size = 1
 
     food = 7 * WIDTH + 8
+    
+    #ამ ფუნქციით ვქმნით 'Snake'-ის ფანჯარას და ვუთითებთ თამაშის ძირითად კომპონენტებს.
 
 
 def init_board(__snake, __size, __board):
@@ -47,6 +49,7 @@ def init_board(__snake, __size, __board):
         else:
             __board[i] = SNAKE
 
+     #ამ ფუნქციით ვქმნით 'Snake'-ის სათამაშო დაფას 
 
 def can_move(pos, dirc):
     if dirc == UP and pos / WIDTH > 0:
@@ -59,7 +62,9 @@ def can_move(pos, dirc):
         return True
     return False
 
-
+     #ეს ფუნქცია განსაზღვრავს თამაშში გველის მოძრაობებს(მარცხნივ, მარჯვნივ, ზემოთ, ქვემოთ)
+    
+      
 def find_food_path_bfs(__food, __snake, __board):
     found = False
     q = [__food]  # not using Queue() because it is slower
@@ -108,7 +113,7 @@ def gen_food():
         h = randint(1, HEIGHT - 2)
         food = h * WIDTH + w
         a = not (food in snake[:snake_size])
-
+      #ეს ფუნქცია აგენერირებს გველის საჭმელს არეულად(random)
 
 def r_move(__mv):
     global snake, board, snake_size, score
@@ -215,18 +220,18 @@ def run():
                 pygame.draw.rect(screen, WHITE, (int(i / WIDTH) * 24, int(i % WIDTH) * 24, 24, 24))
         init_board(snake, snake_size, board)
 
-        # main logic:
-        # find the distance from food to the 0 of the snake
+        # ამ ფუნქციის ლოგიკა არის რომ იპოვოს დისტანცია გველიდან მის საკვებამდე
+        # 
         #
-        # if succeed:
-        #     check if the snake can reach its tail
-        #     if succeed: go to the food through the minimum move
-        #     if not: follow the movement of the tail
-        # if not:
-        #     follow the movement of the tail
+        # თუ გამოდის:
+        #     ამოწმებს შეუძლია თუ არა გველს მიწვდეს მის კუდს
+        #     თუ შეუძლია: მივიდეს საკვებამდე მინიმალური მოძრაობის რაოდენობით
+        #     თუ არ შეუძლია: უნდა მიჰყვეს მისი კუდის მოძრაობას
+        # თუ არ გამოდის:
+        #     უნდა მიჰყვეს მისი კუდის მოძრაობას
         #
-        # if the snake cannot reach either the food or its tail:
-        #     move one block randomly and check again
+        # თუ გველს არ შეუძლია მიწვდეს საკვებს ან მის კუდს:
+        #     უნდა გადაადგილდეს 1 ბლოკით არეულად(random) და შეამოწმოს ახლიდან
 
         best_move = final_path() if find_food_path_bfs(food, snake, board) else follow_tail()
         if best_move is None:
@@ -262,7 +267,8 @@ def start_screen():
         pygame.display.update()
     pygame.quit()
     sys.exit()
-
+    #ამ ფუნქციით ვქმნით თამაშის დაწების ეკრანს(ფანჯარას) რომელიც გამოდის პროგრამის გაშვებისას. ამ ფანჯარაზე გამოსახულია თამაშის 
+    #სათაური და ჩართვის(Play) ღილაკი
 
 def gg_screen():
     gg = True
@@ -278,6 +284,9 @@ def gg_screen():
     back_button = pygame.draw.rect(screen, WHITE, (300, 300, 100, 50))
     screen.blit(term, (114, 270))
     screen.blit(back, (310, 300))
+    
+    #ამ ფუნქციით ვქმნით თამაშის დასასრულის ფანჯარას. ამ ფანჯარაზე გამოსახულია 'თამაში დასრულებულია'(Game Over) და დაგროვებული
+    #ქულების რაოდენობა.
 
     while gg:
         for event in pygame.event.get():
